@@ -31,3 +31,15 @@ function drawBoard(){
 }
 
 drawBoard()
+
+// the pieces and their colors
+
+const pieces = [
+    [Z,"red"],
+    [S,"green"],
+    [T,"yellow"],
+    [O,"blue"],
+    [L,"purple"],
+    [I,"cyan"],
+    [J,"orange"]
+];
