@@ -60,3 +60,11 @@ class Piece {
 
 }
 
+// random pieces
+
+function randomPiece() {
+    let r = randomN = Math.floor(Math.random() * pieces.length) // 0 -> 6
+    return new Piece(pieces[r][0], pieces[r][1]);
+}
+
+let p = randomPiece();
