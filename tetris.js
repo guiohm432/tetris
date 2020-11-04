@@ -58,6 +58,34 @@ class Piece {
         this.y = -2;
     }
 
+    collision (x,y){
+        for( let r = 0; r < this.activeTetromino.length; r++){
+            for(let c = 0; c < this.activeTetromino.length; c++){
+                // if the square is empty, we skip it
+                if(!this.activeTetromino[r][c]){
+                    continue;
+                }
+                // coordinates of the piece after movement
+                let newX = this.x + c + x;
+                let newY = this.y + r + y;
+                
+                // conditions
+                if(newX < 0 || newX >= column || newY >= row){
+                    return true;
+                }
+                // skip newY < 0; board[-1] will crush our game
+                if(newY < 0){
+                    continue;
+                }
+                // check if there is a locked piece already in place
+                if( board[newY][newX] != vacant){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 }
 
 // random pieces
@@ -68,3 +96,10 @@ function randomPiece() {
 }
 
 let p = randomPiece();
+console.log(p)
+
+
+
+
+
+
