@@ -58,11 +58,11 @@ class Piece {
         this.y = -2;
     }
 
-    collision (x,y){
-        for( let r = 0; r < this.activeTetromino.length; r++){
-            for(let c = 0; c < this.activeTetromino.length; c++){
+    collision (x,y,piece){
+        for( let r = 0; r < piece.length; r++){
+            for(let c = 0; c < piece.length; c++){
                 // if the square is empty, we skip it
-                if(!this.activeTetromino[r][c]){
+                if(!piece[r][c]){
                     continue;
                 }
                 // coordinates of the piece after movement
@@ -97,6 +97,7 @@ function randomPiece() {
 
 let p = randomPiece();
 console.log(p)
+console.log(p.collision(10,0,p.activeTetromino))
 
 
 
