@@ -47,7 +47,7 @@ const pieces = [
 
 class Piece {
 
-    constructor (tetromino, color) {
+    constructor(tetromino, color) {
         this.tetromino = tetromino;
         this.color = color;
         this.tetrominoN = 0; // we start from the first pattern
@@ -58,33 +58,47 @@ class Piece {
         this.y = -2;
     }
 
-    collision (x,y,piece){
-        for( let r = 0; r < piece.length; r++){
-            for(let c = 0; c < piece.length; c++){
+    collision(x, y, piece) {
+        for (let r = 0; r < piece.length; r++) {
+            for (let c = 0; c < piece.length; c++) {
                 // if the square is empty, we skip it
-                if(!piece[r][c]){
+                if (!piece[r][c]) {
                     continue;
                 }
                 // coordinates of the piece after movement
                 let newX = this.x + c + x;
                 let newY = this.y + r + y;
-                
+
                 // conditions
-                if(newX < 0 || newX >= column || newY >= row){
+                if (newX < 0 || newX >= column || newY >= row) {
                     return true;
                 }
                 // skip newY < 0; board[-1] will crush our game
-                if(newY < 0){
+                if (newY < 0) {
                     continue;
                 }
                 // check if there is a locked piece already in place
-                if( board[newY][newX] != vacant){
+                if (board[newY][newX] != vacant) {
                     return true;
                 }
             }
         }
         return false;
     }
+
+    // fill function
+
+    fill(color) {
+        for (r = 0; r < this.activeTetromino.length; r++) {
+            for (c = 0; c < this.activeTetromino.length; c++) {
+                // we draw only occupied squares
+                if (this.activeTetromino[r][c]) {
+                    drawSquare(this.x + c, this.y + r, color);
+                }
+            }
+        }
+    }
+
 
 }
 
@@ -97,10 +111,4 @@ function randomPiece() {
 
 let p = randomPiece();
 console.log(p)
-console.log(p.collision(10,0,p.activeTetromino))
-
-
-
-
-
-
+console.log(p.collision(10, 0, p.activeTetromino))
