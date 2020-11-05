@@ -89,14 +89,20 @@ class Piece {
     // fill function
 
     fill(color) {
-        for (r = 0; r < this.activeTetromino.length; r++) {
-            for (c = 0; c < this.activeTetromino.length; c++) {
+        for (let r = 0; r < this.activeTetromino.length; r++) {
+            for (let c = 0; c < this.activeTetromino.length; c++) {
                 // we draw only occupied squares
                 if (this.activeTetromino[r][c]) {
                     drawSquare(this.x + c, this.y + r, color);
                 }
             }
         }
+    }
+
+    // draw a piece to the board
+
+    draw() {
+        this.fill(this.color);
     }
 
 
@@ -111,4 +117,3 @@ function randomPiece() {
 
 let p = randomPiece();
 console.log(p)
-console.log(p.collision(10, 0, p.activeTetromino))
