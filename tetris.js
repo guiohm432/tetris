@@ -105,6 +105,13 @@ class Piece {
         this.fill(this.color);
     }
 
+    // undraw a piece
+
+
+    undraw() {
+        this.fill(vacant);
+    }
+
 
 }
 
