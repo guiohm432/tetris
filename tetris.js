@@ -112,6 +112,15 @@ class Piece {
         this.fill(vacant);
     }
 
+    // move Right the piece
+    moveRight() {
+        if (!this.collision(1, 0, this.activeTetromino)) {
+            this.undraw();
+            this.x++;
+            this.draw();
+        }
+    }
+
 
 }
 
@@ -123,4 +132,7 @@ function randomPiece() {
 }
 
 let p = randomPiece();
-console.log(p)
+// console.log(p)
+// p.x=3
+// p.y=3
+// p.draw()
