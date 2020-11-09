@@ -121,6 +121,14 @@ class Piece {
         }
     }
 
+    // move Left the piece
+    moveLeft() {
+        if (!this.collision(-1, 0, this.activeTetromino)) {
+            this.undraw();
+            this.x--;
+            this.draw();
+        }
+    }
 
 }
 
