@@ -130,7 +130,31 @@ class Piece {
         }
     }
 
+    // rotate the piece
+    rotate() {
+        let nextPattern = this.tetromino[(this.tetrominoN + 1) % this.tetromino.length];
+        let kick = 0;
+
+        if (this.collision(0, 0, nextPattern)) {
+            if (this.x > column / 2) {
+                // it's the right wall
+                kick = -1; // we need to move the piece to the left
+            } else {
+                // it's the left wall
+                kick = 1; // we need to move the piece to the right
+            }
+        }
+
+        if (!this.collision(kick, 0, nextPattern)) {
+            this.undraw();
+            this.x += kick;
+            this.tetrominoN = (this.tetrominoN + 1) % this.tetromino.length; // (0+1)%4 => 1
+            this.activeTetromino = this.tetromino[this.tetrominoN];
+            this.draw();
+        }
+    }
 }
+
 
 // random pieces
 
