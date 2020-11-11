@@ -179,8 +179,24 @@ function randomPiece() {
 }
 
 let p = randomPiece();
-// console.log(p)
-// p.x=3
-// p.y=3
-// p.draw()
+
+
+// CONTROL the piece
+
+document.addEventListener("keydown",control);
+
+function control(event){
+    if(event.keyCode == 37){
+        p.moveLeft();
+        dropStart = Date.now();
+    }else if(event.keyCode == 38){
+        p.rotate();
+        dropStart = Date.now();
+    }else if(event.keyCode == 39){
+        p.moveRight();
+        dropStart = Date.now();
+    }else if(event.keyCode == 40){
+        p.moveDown();
+    }
+}
 
