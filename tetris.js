@@ -112,6 +112,21 @@ class Piece {
         this.fill(vacant);
     }
 
+    // move Down the piece
+
+    moveDown(){
+    if(!this.collision(0,1,this.activeTetromino)){
+        this.undraw();
+        this.y++;
+        this.draw();
+    }else{
+        // we lock the piece and generate a new one
+        this.lock();
+        p = randomPiece();
+    }
+    
+}
+
     // move Right the piece
     moveRight() {
         if (!this.collision(1, 0, this.activeTetromino)) {
@@ -168,3 +183,4 @@ let p = randomPiece();
 // p.x=3
 // p.y=3
 // p.draw()
+
