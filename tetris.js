@@ -200,3 +200,21 @@ function control(event){
     }
 }
 
+// drop the piece every 1sec
+
+let dropStart = Date.now();
+let gameOver = false;
+function drop(){
+    let now = Date.now();
+    let delta = now - dropStart;
+    if(delta > 1000){
+        p.moveDown();
+        dropStart = Date.now();
+    }
+    if( !gameOver){
+        requestAnimationFrame(drop);
+    }
+}
+
+drop();
+
