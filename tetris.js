@@ -169,7 +169,54 @@ class Piece {
             this.activeTetromino = this.tetromino[this.tetrominoN];
             this.draw();
         }
-    }    
+    } 
+    
+    lock() {
+        for (let r = 0; r < this.activeTetromino.length; r++) {
+            for (let c = 0; c < this.activeTetromino.length; c++) {
+                // we skip the vacant squares
+                if (!this.activeTetromino[r][c]) {
+                    continue;
+                }
+                // pieces to lock on top = game over
+                if (this.y + r < 0) {
+                    alert("Game Over");
+                    // stop request animation frame
+                    gameOver = true;
+                    break;
+                }
+                // we lock the piece
+                board[this.y + r][this.x + c] = this.color;
+            }
+        }
+        // remove full rows
+        for (let r = 0; r < row; r++) {
+            let isRowFull = true;
+            for (let c = 0; c < column; c++) {
+                isRowFull = isRowFull && (board[r][c] != vacant);
+            }
+            if (isRowFull) {
+                // if the row is full
+                // we move down all the rows above it
+                for (let y = r; y > 1; y--) {
+                    for (let c = 0; c < column; c++) {
+                        board[y][c] = board[y - 1][c];
+                    }
+                }
+                // the top row board[0][..] has no row above it
+                for (let c = 0; c < column; c++) {
+                    board[0][c] = vacant;
+                }
+                // increment the score
+                score += 10;
+            }
+        }
+        // update the board
+        drawBoard();
+    
+        // update the score
+        scoreElement.innerHTML = score;
+    }
 }
 
 
