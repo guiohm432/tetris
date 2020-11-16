@@ -1,5 +1,6 @@
 const cvs = document.getElementById("tetris")
 const ctx = cvs.getContext("2d")
+const scoreElement = document.getElementById("score");
 const sq = 20
 
 function drawSquare(x, y, color) {
@@ -14,6 +15,7 @@ const row = 20
 const column = 10
 const vacant = "white"
 let board = []
+let score = 0
 
 for (let r = 0; r < row; r++) {
     board[r] = []
@@ -114,18 +116,18 @@ class Piece {
 
     // move Down the piece
 
-    moveDown(){
-    if(!this.collision(0,1,this.activeTetromino)){
-        this.undraw();
-        this.y++;
-        this.draw();
-    }else{
-        // we lock the piece and generate a new one
-        this.lock();
-        p = randomPiece();
+    moveDown() {
+        if (!this.collision(0, 1, this.activeTetromino)) {
+            this.undraw();
+            this.y++;
+            this.draw();
+        } else {
+            // we lock the piece and generate a new one
+            this.lock();
+            p = randomPiece();
+        }
+
     }
-    
-}
 
     // move Right the piece
     moveRight() {
@@ -167,7 +169,7 @@ class Piece {
             this.activeTetromino = this.tetromino[this.tetrominoN];
             this.draw();
         }
-    }
+    }    
 }
 
 
@@ -183,19 +185,19 @@ let p = randomPiece();
 
 // CONTROL the piece
 
-document.addEventListener("keydown",control);
+document.addEventListener("keydown", control);
 
-function control(event){
-    if(event.keyCode == 37){
+function control(event) {
+    if (event.keyCode == 37) {
         p.moveLeft();
         dropStart = Date.now();
-    }else if(event.keyCode == 38){
+    } else if (event.keyCode == 38) {
         p.rotate();
         dropStart = Date.now();
-    }else if(event.keyCode == 39){
+    } else if (event.keyCode == 39) {
         p.moveRight();
         dropStart = Date.now();
-    }else if(event.keyCode == 40){
+    } else if (event.keyCode == 40) {
         p.moveDown();
     }
 }
@@ -204,17 +206,17 @@ function control(event){
 
 let dropStart = Date.now();
 let gameOver = false;
-function drop(){
+
+function drop() {
     let now = Date.now();
     let delta = now - dropStart;
-    if(delta > 1000){
+    if (delta > 1000) {
         p.moveDown();
         dropStart = Date.now();
     }
-    if( !gameOver){
+    if (!gameOver) {
         requestAnimationFrame(drop);
     }
 }
 
 drop();
-
